@@ -2,7 +2,7 @@
 
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, useGLTF, Environment, ContactShadows, Float } from "@react-three/drei";
-import { Suspense, useRef } from "react";
+import { Suspense, useRef, useState, useEffect } from "react";
 import * as THREE from "three";
 
 function Model({ url, glowIntensity }: { url: string; glowIntensity: number }) {
@@ -26,9 +26,22 @@ function Model({ url, glowIntensity }: { url: string; glowIntensity: number }) {
 }
 
 export default function AssetViewer({ url, glowIntensity = 0, reactToVote = false }: { url: string; glowIntensity?: number; reactToVote?: boolean }) {
+    const [fov, setFov] = useState(45);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setFov(window.innerWidth < 768 ? 70 : 45);
+        };
+        handleResize();
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+    const dpr = typeof window !== "undefined" ? Math.min(window.devicePixelRatio, 2) : 2;
+
     return (
         <div className="w-full h-full relative group">
-            <Canvas camera={{ position: [0, 2, 7], fov: 45 }}>
+            <Canvas camera={{ position: [0, 2, 7], fov }} dpr={dpr} style={{ touchAction: 'pan-y' }}>
                 <ambientLight intensity={0.5} />
                 <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} color="#00ffff" />
                 <pointLight position={[-10, -10, -10]} intensity={0.5} color="#0bda50" />
@@ -41,7 +54,7 @@ export default function AssetViewer({ url, glowIntensity = 0, reactToVote = fals
                     <ContactShadows position={[0, -1.5, 0]} opacity={0.6} scale={15} blur={2.5} far={4} color="#00ffff" />
                 </Suspense>
 
-                <OrbitControls autoRotate={false} enableZoom={true} maxPolarAngle={Math.PI / 2} minPolarAngle={Math.PI / 3} />
+                <OrbitControls autoRotate={false} enableZoom={true} enablePan={false} maxPolarAngle={Math.PI / 2} minPolarAngle={Math.PI / 3} />
             </Canvas>
         </div>
     );

@@ -37,9 +37,9 @@ export default function RootLayout({
 
           <div className="relative z-10 flex h-screen w-full overflow-hidden">
             <Sidebar />
-            <div className="flex-1 flex flex-col h-full overflow-hidden relative">
+            <div className="flex-1 flex flex-col h-full overflow-hidden relative pb-[calc(4.5rem+env(safe-area-inset-bottom))] md:pb-0">
               <TopNav />
-              <main className="flex-1 overflow-y-auto">
+              <main className="flex-1 overflow-y-auto w-full h-full pb-4 md:pb-0">
                 {children}
               </main>
             </div>

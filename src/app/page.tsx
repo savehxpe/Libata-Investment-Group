@@ -54,19 +54,19 @@ export default function DashboardPage() {
 
       <div className="grid grid-cols-12 gap-6">
         {/* Main Hero & 3D Integration */}
-        <div className="col-span-12 lg:col-span-8 flex flex-col gap-6">
-          <div className="glass-panel rounded-xl border border-border-chrome/20 h-[450px] relative overflow-hidden group">
+        <div className="col-span-12 lg:col-span-8 flex flex-col lg:flex-row gap-6">
+          <div className="w-full aspect-square max-h-[50vh] md:w-full md:max-h-none md:aspect-video lg:w-1/2 lg:aspect-auto lg:h-[450px] glass-panel rounded-xl border border-border-chrome/20 relative overflow-hidden group">
             <div className="absolute inset-0 z-0">
               <AssetViewer url="/assets/A-futuristic-minimalist-architec-23bqrb-211017489.glb" glowIntensity={glowIntensity} />
             </div>
 
             {/* UI Overlay */}
-            <div className="absolute top-6 left-6 z-10 bg-black/40 p-4 rounded-lg backdrop-blur border border-white/10 w-72">
+            <div className="absolute top-4 left-4 lg:top-6 lg:left-6 z-10 bg-black/40 p-6 rounded-lg backdrop-blur border border-white/10 w-64 md:w-72">
               <div className="flex items-center gap-2 mb-3">
                 <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
                 <span className="text-xs font-bold text-white tracking-widest uppercase px-2 py-1 rounded border border-white/10 bg-black/50">Equity Engine</span>
               </div>
-              <h2 className="text-lg font-bold text-white neon-text mb-1">Compute Your Stake</h2>
+              <h2 className="text-[clamp(1rem,5vw,1.5rem)] font-bold text-white neon-text mb-1 leading-tight">Compute Your Stake</h2>
               <p className="text-xs text-slate-400 mb-4">Adjust your annual commitment to see projection changes live.</p>
 
               <div className="flex flex-col gap-2">
@@ -78,33 +78,33 @@ export default function DashboardPage() {
                   step="1000"
                   value={calcValue}
                   onChange={handleCalcChange}
-                  className="w-full h-1 bg-slate-700 rounded outline-none appearance-none accent-primary"
+                  className="w-full h-8 bg-slate-700/50 rounded-full outline-none appearance-none accent-primary border border-primary/20 py-2 cursor-pointer"
                 />
-                <div className="flex justify-between items-center mt-1">
+                <div className="flex justify-between items-center mt-1 w-full min-h-[48px]">
                   <input
                     type="number"
                     value={calcValue}
                     onChange={handleCalcChange}
-                    className="bg-black/60 border border-primary/30 rounded px-2 py-1 text-primary text-sm font-mono w-24 outline-none focus:border-primary"
+                    className="bg-black/60 border border-primary/30 rounded px-4 py-3 text-primary text-sm font-mono w-28 outline-none focus:border-primary shrink-0"
                   />
-                  <span className="text-xs font-bold text-accent-green">LIVE SYNC</span>
+                  <span className="text-xs font-bold text-accent-green pl-2 whitespace-nowrap">LIVE SYNC</span>
                 </div>
               </div>
             </div>
 
             {/* Scanning effects */}
             <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(0,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,255,0.05)_1px,transparent_1px)] bg-[size:40px_40px]"></div>
-            <div className="absolute inset-x-0 h-px bg-primary shadow-[0_0_15px_rgba(0,255,255,0.8)] animate-[scan_4s_ease-in-out_infinite] opacity-30 pointer-events-none"></div>
+            <div className="absolute inset-x-0 h-px bg-primary shadow-[0_0_15px_rgba(0,255,255,0.8)] animate-[scan_4s_ease-in-out_infinite] opacity-30 pointer-events-none blur-lg md:blur-none"></div>
           </div>
 
           {/* Proposals Overview Board */}
-          <div className="glass-panel rounded-xl border border-border-chrome/20 p-6 flex-1 min-h-[300px]">
+          <div className="glass-panel rounded-xl border border-border-chrome/20 p-6 flex-1 min-h-[300px] lg:h-[450px] overflow-y-auto">
             <div className="flex justify-between items-center mb-6">
-              <h3 className="text-lg font-bold text-white flex items-center gap-2">
+              <h3 className="text-[clamp(1rem,4vw,1.25rem)] font-bold text-white flex items-center gap-2">
                 <span className="material-symbols-outlined text-primary">how_to_vote</span>
                 Active Proposals
               </h3>
-              <button className="text-xs text-primary hover:text-white transition-colors uppercase tracking-wider font-bold">View All</button>
+              <button className="text-[10px] md:text-xs text-primary hover:text-white transition-colors uppercase tracking-wider font-bold p-2 md:p-0 min-h-[48px] md:min-h-0 flex items-center">View All</button>
             </div>
 
             <div className="space-y-4">
