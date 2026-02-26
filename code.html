@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Libata Quantum Portal Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#00ffff",
+                        "primary-dim": "#00cccc",
+                        "background-light": "#f5f8f8",
+                        "background-dark": "#050505", /* User requested deepest charcoal */
+                        "surface-dark": "#0a1111",
+                        "border-chrome": "#E0E0E0",
+                        "accent-green": "#0bda50",
+                    },
+                    fontFamily: {
+                        display: ["Space Grotesk", "sans-serif"],
+                    },
+                    backgroundImage: {
+                        'noise': "url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.05%22/%3E%3C/svg%3E')",
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(10, 17, 17, 0.6);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(224, 224, 224, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+        .chrome-border {
+            border: 1px solid rgba(224, 224, 224, 0.3);
+        }
+        .neon-text {
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+        .neon-box {
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.15);
+        }
+        /* Custom scrollbar for deep dark theme */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050505;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #273a3a;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00ffff;
+        }
+    </style>
+</head>
+<body class="bg-background-dark text-slate-100 font-display min-h-screen overflow-hidden selection:bg-primary selection:text-black">
+<!-- Background Noise Overlay -->
+<div class="fixed inset-0 pointer-events-none z-0 bg-noise opacity-30 mix-blend-overlay"></div>
+<div class="relative z-10 flex h-screen w-full overflow-hidden">
+<!-- Sidebar -->
+<aside class="w-64 flex flex-col glass-panel border-r border-border-chrome/20 h-full relative shrink-0">
+<div class="p-6 flex items-center gap-3 border-b border-border-chrome/10">
+<div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-blue-600 flex items-center justify-center shadow-[0_0_15px_rgba(0,255,255,0.4)]">
+<span class="material-symbols-outlined text-black font-bold">diamond</span>
+</div>
+<div>
+<h1 class="text-white text-base font-bold tracking-wider uppercase">Libata<br/><span class="text-primary text-xs tracking-[0.2em] font-light">Quantum</span></h1>
+</div>
+</div>
+<nav class="flex-1 overflow-y-auto py-6 px-3 flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg bg-primary/10 border border-primary/30 text-white group transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">dashboard</span>
+<span class="text-sm font-medium tracking-wide">The Vault</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-white/5 border border-transparent hover:border-white/10 text-slate-400 hover:text-white transition-all duration-300" href="#">
+<span class="material-symbols-outlined">folder_managed</span>
+<span class="text-sm font-medium tracking-wide">Portfolio</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-white/5 border border-transparent hover:border-white/10 text-slate-400 hover:text-white transition-all duration-300" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="text-sm font-medium tracking-wide">Proposals</span>
+<span class="ml-auto bg-primary text-black text-[10px] font-bold px-1.5 py-0.5 rounded">3</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-white/5 border border-transparent hover:border-white/10 text-slate-400 hover:text-white transition-all duration-300" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="text-sm font-medium tracking-wide">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-white/5 border border-transparent hover:border-white/10 text-slate-400 hover:text-white transition-all duration-300" href="#">
+<span class="material-symbols-outlined">hub</span>
+<span class="text-sm font-medium tracking-wide">Network</span>
+</a>
+</nav>
+<div class="p-4 border-t border-border-chrome/10">
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-white/5 text-slate-400 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-medium tracking-wide">Settings</span>
+</a>
+<div class="mt-4 flex items-center gap-3 px-3">
+<div class="w-8 h-8 rounded-full bg-slate-700 border border-border-chrome/30 bg-cover bg-center" data-alt="User profile picture" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAK1pKcwVuSqvIljwIFSDb6JU7C70WuROHLqWRyCIbSKcZBgZC8kaX2H7Qx_OmnhJdohKO6mZDcBBEKz86HBBOTRSYLG5GjmkNT3QKsP_QdrGzKhZnCznSqbylzdTfZjGqw3FOBnYeYDJXgNcDNm-Ecp6FVc1x7FSWWmZAv-p81vimRrrrr9fTCML9aFqZY1FFI9wuWKrSvlcEqDc1dASCpPkMS9G4P1VZn9dHFbF1mhZowHsCLHu73W4bv09hrMiGv9J7qRkhxj7Ls')"></div>
+<div class="flex flex-col">
+<span class="text-xs text-white font-medium">L. Moshoeshoe</span>
+<span class="text-[10px] text-primary">Admin Access</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col h-full overflow-hidden relative">
+<!-- Header -->
+<header class="h-16 flex items-center justify-between px-8 border-b border-border-chrome/10 glass-panel shrink-0 z-20">
+<div class="flex items-center gap-4">
+<h2 class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                        Dashboard Overview
+                    </h2>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative hidden md:block">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-slate-500 text-[18px]">search</span>
+<input class="bg-black/40 border border-border-chrome/20 rounded-full py-1.5 pl-10 pr-4 text-sm text-white focus:outline-none focus:border-primary/50 w-64 transition-all" placeholder="Search assets..." type="text"/>
+</div>
+<button class="relative text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+</button>
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">help</span>
+</button>
+</div>
+</header>
+<!-- Dashboard Grid -->
+<div class="flex-1 overflow-y-auto p-6 lg:p-8 grid grid-cols-12 gap-6 relative z-10">
+<!-- Row 1: Key Metrics (Top) -->
+<div class="col-span-12 grid grid-cols-1 md:grid-cols-3 gap-6 mb-2">
+<!-- Metric Card 1 -->
+<div class="glass-panel p-6 rounded-xl border-l-4 border-l-primary relative overflow-hidden group">
+<div class="absolute right-0 top-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl text-primary">account_balance_wallet</span>
+</div>
+<p class="text-slate-400 text-sm font-medium uppercase tracking-widest mb-1">War Chest (LSL)</p>
+<h3 class="text-3xl font-bold text-white tracking-tight">M 45,000,000</h3>
+<div class="flex items-center gap-2 mt-2">
+<span class="text-accent-green bg-accent-green/10 px-2 py-0.5 rounded text-xs font-bold">+12.5%</span>
+<span class="text-slate-500 text-xs">vs last month</span>
+</div>
+</div>
+<!-- Metric Card 2 -->
+<div class="glass-panel p-6 rounded-xl border-l-4 border-l-primary/50 relative overflow-hidden group">
+<div class="absolute right-0 top-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl text-white">rocket_launch</span>
+</div>
+<p class="text-slate-400 text-sm font-medium uppercase tracking-widest mb-1">Active Projects</p>
+<h3 class="text-3xl font-bold text-white tracking-tight">12</h3>
+<div class="flex items-center gap-2 mt-2">
+<span class="text-accent-green bg-accent-green/10 px-2 py-0.5 rounded text-xs font-bold">+2</span>
+<span class="text-slate-500 text-xs">new proposals</span>
+</div>
+</div>
+<!-- Metric Card 3 -->
+<div class="glass-panel p-6 rounded-xl border-l-4 border-l-primary/50 relative overflow-hidden group">
+<div class="absolute right-0 top-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl text-white">trending_up</span>
+</div>
+<p class="text-slate-400 text-sm font-medium uppercase tracking-widest mb-1">ROI (YTD)</p>
+<h3 class="text-3xl font-bold text-white tracking-tight">18.2%</h3>
+<div class="flex items-center gap-2 mt-2">
+<span class="text-accent-green bg-accent-green/10 px-2 py-0.5 rounded text-xs font-bold">Target Exceeded</span>
+</div>
+</div>
+</div>
+<!-- Row 2: Main Interactive Area -->
+<!-- 3D Integration Zone (Left) -->
+<div class="col-span-12 lg:col-span-8 flex flex-col gap-6">
+<div class="glass-panel rounded-xl border border-border-chrome/20 h-[400px] relative overflow-hidden group">
+<div class="absolute inset-0 bg-cover bg-center opacity-60 mix-blend-overlay transition-transform duration-1000 group-hover:scale-105" data-alt="Abstract wireframe of a modern building structure" data-location="Maseru, Lesotho" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBzj8ny680-Q3TI4DKz4Dn0b85gyueOmfuesZkWcYsEOlvp3XfgbAH7uxpUu-DkK0JcVAs_Fagk8bZGfvmy3SwhDRb9ct01bI6ohp9mGP9tmh7G5jb6VzOdzPmxdX5hMkMuESqOpCEAzpDvRR2h1bXOT2NzzbZEwEMMR38BbdamEuiKlx-Dch1JXpHY8LXasXQqWeLPabjv3-D8hh8lB_4cSur3Qma5Hc82xr6cMNtHvhw-5KHgkZ3D0dZD-AzISW-PTnS3u-I6BYcI')">
+</div>
+<!-- Scanning Grid Overlay -->
+<div class="absolute inset-0 bg-[linear-gradient(rgba(0,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,255,0.05)_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+<!-- Scanning Line Animation -->
+<div class="absolute inset-x-0 h-px bg-primary shadow-[0_0_15px_rgba(0,255,255,0.8)] animate-[scan_4s_ease-in-out_infinite] opacity-50"></div>
+<!-- UI Overlay -->
+<div class="absolute top-6 left-6 z-10">
+<div class="flex items-center gap-2 mb-2">
+<span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+<span class="text-xs font-bold text-white tracking-widest uppercase bg-black/50 px-2 py-1 rounded border border-white/10">Live Feed</span>
+</div>
+<h2 class="text-2xl font-bold text-white drop-shadow-lg neon-text">Lesotho Hub: Phase 1</h2>
+<p class="text-primary text-sm font-mono mt-1">lat: -29.31 | long: 27.48</p>
+</div>
+<!-- Controls -->
+<div class="absolute bottom-6 right-6 z-10 flex gap-3">
+<button class="bg-black/60 hover:bg-primary/20 backdrop-blur border border-white/20 hover:border-primary text-white p-2 rounded-lg transition-all">
+<span class="material-symbols-outlined">view_in_ar</span>
+</button>
+<button class="bg-black/60 hover:bg-primary/20 backdrop-blur border border-white/20 hover:border-primary text-white p-2 rounded-lg transition-all">
+<span class="material-symbols-outlined">layers</span>
+</button>
+<button class="bg-primary hover:bg-white text-black font-bold px-4 py-2 rounded-lg transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">visibility</span> View Model
+                            </button>
+</div>
+</div>
+<!-- Proposal Board (Interactive) -->
+<div class="glass-panel rounded-xl border border-border-chrome/20 p-6 flex-1 min-h-[300px]">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-lg font-bold text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">how_to_vote</span>
+                                Active Proposals
+                            </h3>
+<button class="text-xs text-primary hover:text-white transition-colors uppercase tracking-wider font-bold">View All</button>
+</div>
+<div class="space-y-4">
+<!-- Proposal Item 1 -->
+<div class="bg-white/5 border border-white/5 rounded-lg p-4 hover:border-primary/30 transition-all cursor-pointer group">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h4 class="text-white font-medium group-hover:text-primary transition-colors">Highlands Water Expansion</h4>
+<p class="text-slate-400 text-xs mt-1">Infrastructure • budget: M 12.5m</p>
+</div>
+<span class="bg-yellow-500/20 text-yellow-500 text-[10px] font-bold px-2 py-1 rounded uppercase">Voting Open</span>
+</div>
+<div class="w-full bg-slate-800 h-1.5 rounded-full mt-3 overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 72%"></div>
+</div>
+<div class="flex justify-between mt-2 text-xs text-slate-500">
+<span>72% Approval</span>
+<span>2 days left</span>
+</div>
+</div>
+<!-- Proposal Item 2 -->
+<div class="bg-white/5 border border-white/5 rounded-lg p-4 hover:border-primary/30 transition-all cursor-pointer group">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h4 class="text-white font-medium group-hover:text-primary transition-colors">Agri-Tech Zone Beta</h4>
+<p class="text-slate-400 text-xs mt-1">Agriculture • budget: M 4.2m</p>
+</div>
+<span class="bg-green-500/20 text-green-500 text-[10px] font-bold px-2 py-1 rounded uppercase">Approved</span>
+</div>
+<div class="w-full bg-slate-800 h-1.5 rounded-full mt-3 overflow-hidden">
+<div class="bg-accent-green h-full rounded-full" style="width: 100%"></div>
+</div>
+<div class="flex justify-between mt-2 text-xs text-slate-500">
+<span>Finalized</span>
+<span>Awaiting Disbursement</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Financial Matrix & Timeline -->
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-6">
+<!-- Neon Donut Chart -->
+<div class="glass-panel rounded-xl border border-border-chrome/20 p-6 flex flex-col items-center justify-center relative neon-box">
+<h3 class="w-full text-left text-sm font-bold text-slate-300 uppercase tracking-wider mb-4 border-b border-white/10 pb-2">Asset Allocation</h3>
+<div class="relative w-48 h-48 my-4">
+<!-- CSS Conic Gradient Donut Chart -->
+<div class="w-full h-full rounded-full" style="background: conic-gradient(#00ffff 0% 45%, #0bda50 45% 75%, #ffffff 75% 100%); padding: 2px;">
+<div class="w-full h-full bg-surface-dark rounded-full flex items-center justify-center relative z-10" style="clip-path: circle(42% at 50% 50%); background-color: #0a1111;">
+<!-- Inner Hole is handled by parent background or overlay, using clip-path here to mask -->
+</div>
+<!-- Inner Content -->
+<div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-20">
+<span class="text-xs text-slate-400">Total Assets</span>
+<span class="text-xl font-bold text-white">100%</span>
+</div>
+</div>
+<!-- Glow effects -->
+<div class="absolute inset-0 rounded-full shadow-[0_0_20px_rgba(0,255,255,0.3)] pointer-events-none"></div>
+</div>
+<div class="w-full space-y-3 mt-2">
+<div class="flex items-center justify-between text-sm">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-sm bg-primary shadow-[0_0_8px_rgba(0,255,255,0.8)]"></span>
+<span class="text-slate-300">Real Estate</span>
+</div>
+<span class="font-mono text-primary">45%</span>
+</div>
+<div class="flex items-center justify-between text-sm">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-sm bg-accent-green shadow-[0_0_8px_rgba(11,218,80,0.8)]"></span>
+<span class="text-slate-300">Agriculture</span>
+</div>
+<span class="font-mono text-accent-green">30%</span>
+</div>
+<div class="flex items-center justify-between text-sm">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-sm bg-white shadow-[0_0_8px_rgba(255,255,255,0.6)]"></span>
+<span class="text-slate-300">Event Mgmt</span>
+</div>
+<span class="font-mono text-white">25%</span>
+</div>
+</div>
+</div>
+<!-- Phase Tracker -->
+<div class="glass-panel rounded-xl border border-border-chrome/20 p-6 flex-1">
+<h3 class="text-sm font-bold text-slate-300 uppercase tracking-wider mb-6 border-b border-white/10 pb-2">36-Month Roadmap</h3>
+<div class="relative pl-4 space-y-8 before:absolute before:left-[21px] before:top-2 before:bottom-2 before:w-0.5 before:bg-gradient-to-b before:from-primary before:via-slate-700 before:to-transparent">
+<!-- Step 1: Active -->
+<div class="relative pl-8">
+<div class="absolute left-0 top-1 w-3 h-3 rounded-full bg-primary shadow-[0_0_10px_rgba(0,255,255,1)] z-10 ring-4 ring-black"></div>
+<h4 class="text-white text-sm font-bold">Phase 1: Foundation</h4>
+<p class="text-[10px] text-primary uppercase font-bold mb-1">Current Status: In Progress</p>
+<p class="text-slate-400 text-xs leading-relaxed">Secure initial capital, finalize legal frameworks, and acquire key infrastructure sites.</p>
+</div>
+<!-- Step 2: Upcoming -->
+<div class="relative pl-8 opacity-70">
+<div class="absolute left-0 top-1 w-3 h-3 rounded-full bg-slate-600 border border-slate-400 z-10 ring-4 ring-black"></div>
+<h4 class="text-slate-200 text-sm font-bold">Phase 2: Expansion</h4>
+<p class="text-[10px] text-slate-500 uppercase font-bold mb-1">Target: Q3 2024</p>
+<p class="text-slate-500 text-xs leading-relaxed">Launch agricultural pilots and begin construction on the central hub.</p>
+</div>
+<!-- Step 3: Future -->
+<div class="relative pl-8 opacity-40">
+<div class="absolute left-0 top-1 w-3 h-3 rounded-full bg-slate-800 border border-slate-600 z-10 ring-4 ring-black"></div>
+<h4 class="text-slate-300 text-sm font-bold">Phase 3: Maturity</h4>
+<p class="text-[10px] text-slate-600 uppercase font-bold mb-1">Target: Q4 2025</p>
+<p class="text-slate-600 text-xs leading-relaxed">Full operational capacity, dividend distribution, and regional scaling.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Scan Animation Keyframes -->
+<style>
+        @keyframes scan {
+            0%, 100% { transform: translateY(0%); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(400px); opacity: 0; }
+        }
+    </style>
+</body></html>
