@@ -10,6 +10,7 @@ const navLinks = [
     { href: "/portfolio", label: "Portfolio", icon: "folder_managed" },
     { href: "/proposals", label: "Proposals", icon: "description", badge: "3" },
     { href: "/analytics", label: "Analytics", icon: "monitoring" },
+    { href: "/network", label: "Network", icon: "hub" },
 ];
 
 export default function Sidebar() {
