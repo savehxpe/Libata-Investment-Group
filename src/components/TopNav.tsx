@@ -12,7 +12,7 @@ export default function TopNav() {
 
     const titleMap: Record<string, string> = {
         "/": "Dashboard Overview",
-        "/vault": "The Vault",
+        "/vault": "Vault",
         "/portfolio": "Portfolio",
         "/proposals": "Proposals",
         "/analytics": "Live Analytics",

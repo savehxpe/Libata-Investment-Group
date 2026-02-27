@@ -6,7 +6,7 @@ import { useMember } from "@/context/MemberContext";
 
 const navLinks = [
     { href: "/", label: "Dashboard", icon: "dashboard" },
-    { href: "/vault", label: "The Vault", icon: "account_balance" },
+    { href: "/vault", label: "Vault", icon: "account_balance" },
     { href: "/portfolio", label: "Portfolio", icon: "folder_managed" },
     { href: "/proposals", label: "Proposals", icon: "description", badge: "3" },
     { href: "/analytics", label: "Analytics", icon: "monitoring" },

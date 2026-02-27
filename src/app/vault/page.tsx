@@ -33,7 +33,7 @@ export default function VaultPage() {
         <div className="flex flex-col gap-6 h-full pb-8">
             {/* Search Header */}
             <div className="glass-panel p-6 rounded-xl border border-border-chrome/20">
-                <h1 className="text-3xl font-bold text-white uppercase tracking-tighter mb-6">The Vault</h1>
+                <h1 className="text-3xl font-bold text-white uppercase tracking-tighter mb-6">Vault</h1>
                 <div className="relative">
                     <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-primary/40" size={18} />
                     <input
@@ -52,8 +52,8 @@ export default function VaultPage() {
                         key={cat}
                         onClick={() => { setActiveCategory(cat); triggerHaptic('SELECTION'); }}
                         className={`px-5 py-3 rounded-full text-[10px] uppercase font-bold whitespace-nowrap transition-all min-h-[48px] ${activeCategory === cat
-                                ? 'bg-primary text-black shadow-[0_0_15px_rgba(0,255,255,0.4)]'
-                                : 'bg-white/5 text-slate-400 border border-white/10 hover:border-white/20'
+                            ? 'bg-primary text-black shadow-[0_0_15px_rgba(0,255,255,0.4)]'
+                            : 'bg-white/5 text-slate-400 border border-white/10 hover:border-white/20'
                             }`}
                     >
                         {cat}
