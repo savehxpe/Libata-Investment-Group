@@ -2,33 +2,36 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import AssetViewer from "@/components/3d/AssetViewer";
+import Image from "next/image";
 import { triggerHaptic } from "@/lib/hapticLogic";
+import { AssetManifest } from "@/config/assetManifest";
 
 type ProjectType = "agriculture" | "real_estate" | null;
 
 // Data derived strictly from the .context/ Libata Pitch Deck
 const projects = [
     {
-        id: 'agri-01',
+        id: AssetManifest.portfolio.agriHub.id,
         title: 'Maseru North Agri-Hub',
         category: 'Commercial Agriculture',
-        status: 'Phase 1: Acquisition',
+        status: AssetManifest.portfolio.agriHub.status,
         description: 'Scalable poultry and crop production hub targeting AfCFTA export markets.',
         valuation: 'M 2,500,000',
         yield: '12-15% Est. APR',
-        modelPath: '/assets/A-futuristic-minimalist-architec-23bqrb-211017489.glb', // Use the existing asset as a placeholder
+        imagePath: AssetManifest.portfolio.agriHub.path,
+        alt: AssetManifest.portfolio.agriHub.alt,
         type: 'agriculture' as ProjectType
     },
     {
-        id: 'prop-01',
+        id: AssetManifest.portfolio.cbdTower.id,
         title: 'CBD Commercial Tower',
         category: 'Real Estate',
-        status: 'Phase 2: Development',
+        status: AssetManifest.portfolio.cbdTower.status,
         description: 'Grade-A office space and secure residential units in central Maseru.',
         valuation: 'M 5,800,000',
         yield: '9.2% Rental Yield',
-        modelPath: '/assets/A-futuristic-minimalist-architec-23bqrb-211017489.glb',
+        imagePath: AssetManifest.portfolio.cbdTower.path,
+        alt: AssetManifest.portfolio.cbdTower.alt,
         type: 'real_estate' as ProjectType
     }
 ];
@@ -63,11 +66,12 @@ export default function PortfolioPage() {
                         viewport={{ once: true }}
                         className="group relative bg-primary/5 border-[0.5px] border-primary/20 rounded-3xl overflow-hidden backdrop-blur-xl"
                     >
-                        {/* 3D Model Stage - Mobile Portrait Optimized */}
-                        <div className="relative h-[300px] w-full bg-gradient-to-b from-transparent to-[#0a1111]">
-                            {/* The 3D Render Component */}
+                        {/* Generated Image Stage - Mobile Portrait Optimized */}
+                        <div className="relative h-[300px] w-full bg-[#0a1111]">
+                            {/* The Generated Render Component */}
                             <div className="absolute inset-0">
-                                <AssetViewer url={project.modelPath} glowIntensity={0} />
+                                <Image src={project.imagePath} alt={project.alt} fill priority className="object-cover mix-blend-screen opacity-70 group-hover:opacity-100 transition-opacity duration-700" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent pointer-events-none"></div>
                             </div>
 
                             <div className="absolute top-4 left-4 z-10 pointer-events-none">
