@@ -36,16 +36,17 @@ export default function AssetViewer({ url, glowIntensity = 0, reactToVote = fals
     return (
         <div className="w-full h-full relative group">
             <Canvas camera={{ position: [0, 2, 7], fov }} dpr={dpr} style={{ touchAction: 'pan-y' }}>
-                <ambientLight intensity={0.5} />
-                <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} color="#00ffff" />
-                <pointLight position={[-10, -10, -10]} intensity={0.5} color="#0bda50" />
+                <ambientLight intensity={0.9} color="#fffcf5" />
+                <directionalLight position={[10, 15, 10]} intensity={2.5} castShadow color="#ffdcb4" />
+                <directionalLight position={[-10, 10, -10]} intensity={0.8} color="#a1c4e5" />
+                <pointLight position={[0, 5, 0]} intensity={0.5} color="#ffffff" />
 
                 <Suspense fallback={null}>
-                    <Float speed={2} rotationIntensity={0} floatIntensity={0.5}>
+                    <Float speed={1} rotationIntensity={0} floatIntensity={0}>
                         <Model url={url} glowIntensity={glowIntensity} />
                     </Float>
-                    <Environment preset="city" />
-                    <ContactShadows position={[0, -1.5, 0]} opacity={0.6} scale={15} blur={2.5} far={4} color="#00ffff" />
+                    <Environment preset="apartment" />
+                    <ContactShadows position={[0, -1.5, 0]} opacity={0.7} scale={20} blur={2} far={4} color="#000000" />
                 </Suspense>
 
                 <OrbitControls
