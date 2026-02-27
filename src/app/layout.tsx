@@ -5,6 +5,7 @@ import Sidebar from "@/components/Sidebar";
 import TopNav from "@/components/TopNav";
 import OnboardingGate from "@/components/OnboardingGate";
 import SplashLoader from "@/components/SplashLoader";
+import SovereignDiamond from "@/components/ui/SovereignDiamond";
 import { MemberProvider } from "@/context/MemberContext";
 
 const spaceGrotesk = Space_Grotesk({
@@ -36,6 +37,7 @@ export default function RootLayout({
         <MemberProvider>
           {/* Background Noise Overlay */}
           <div className="fixed inset-0 pointer-events-none z-0 bg-[var(--background-image-noise)] opacity-30 mix-blend-overlay"></div>
+          <SovereignDiamond />
 
           <SplashLoader>
             <OnboardingGate>
