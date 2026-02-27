@@ -3,45 +3,75 @@
 export default function SovereignDiamond() {
     return (
         <div className="fixed inset-0 z-0 flex items-center justify-center pointer-events-none overflow-hidden">
-            {/* THE GHOST LOGO WATERMARK 
-               Opacity is set to 3% so it is barely visible, 
-               like a watermark on a land deed.
-            */}
+            {/* LAYER 1: The Sovereign Diamond Watermark
+         This uses the Basotho Shield Geometry.
+         Opacity is set to 5% (opacity-5) so it is barely visible, 
+         like a watermark on security document or a land deed.
+      */}
             <svg
                 width="100%"
                 height="100%"
                 viewBox="0 0 500 500"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                className="opacity-[0.03] scale-110 md:opacity-[0.02]"
+                className="opacity-5 scale-125 rotate-3" // Adds depth
             >
-                {/* Sovereign Diamond Outline */}
-                <path
-                    d="M250 10L10 250L250 490L490 250L250 10Z"
-                    stroke="white"
-                    strokeWidth="4"
-                />
-
-                {/* Minimalist 'L' Negative Space */}
+                {/*
+           The traditional 'L' Negative Space.
+           This cuts the 'L' out of the shield structure, 
+           defining Libata within the Basotho form.
+        */}
                 <path
                     d="M130 130H370V370H130V130Z"
-                    fill="#050505"
+                    fill="#050505" // Cuts through the shield, use background color
                 />
                 <path
                     d="M250 10L250 250L490 250"
                     stroke="white"
-                    strokeWidth="4"
-                    strokeDasharray="12 12"
+                    strokeWidth="6"
+                    strokeDasharray="12 12" // Optional dashed effect for technical feel
                 />
 
-                {/* The 'L' Identity Core */}
+                {/*
+           The Primary Basotho Shield Geometry
+           Bold, clean, geometric lines.
+        */}
                 <path
-                    d="M130 370H370V130"
+                    d="M250 10L10 250L250 490L490 250L250 10Z"
+                    stroke="white"
+                    strokeWidth="6" // Milled steel feel
+                />
+
+                {/*
+           Mokorotlo (Basotho Hat) Symbol (Stylized)
+        */}
+                <path
+                    d="M250 100V150"
                     stroke="white"
                     strokeWidth="8"
                 />
+                <path
+                    d="M220 120H280L300 150H200L220 120Z"
+                    fill="white"
+                />
 
-                {/* 'Libata' Technical Text */}
+                {/*
+           Traditional Spears ( Stylized Assegai )
+        */}
+                <path
+                    d="M50 250H450"
+                    stroke="white"
+                    strokeWidth="6"
+                />
+                <path
+                    d="M250 490V10"
+                    stroke="white"
+                    strokeWidth="6"
+                />
+
+                {/*
+           'Libata' Technical Text
+        */}
                 <text
                     x="250"
                     y="270"
