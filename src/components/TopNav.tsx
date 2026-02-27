@@ -22,10 +22,10 @@ export default function TopNav() {
     return (
         <header className="h-16 flex items-center justify-between px-8 border-b border-border-chrome/10 glass-panel shrink-0 z-20">
             <div className="flex items-center gap-4">
-                <h2 className="text-xl font-bold tracking-tight text-white flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-                    {title}
-                </h2>
+                <div className="flex flex-col">
+                    <span className="text-[10px] tracking-[0.2em] text-primary font-bold uppercase">{title}</span>
+                    <span className="text-xs text-white/60 font-mono">ID: LIBATA_SEC_001</span>
+                </div>
             </div>
             <div className="flex items-center gap-6">
                 <div className="flex flex-col items-end mr-4">
